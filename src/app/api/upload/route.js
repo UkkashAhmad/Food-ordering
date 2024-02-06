@@ -1,3 +1,5 @@
+// THIS ONE IS FOR MAKING BUCKET AND ADDING IMGS IN AWS
+
 import {PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
 import uniqid from 'uniqid';
 
@@ -10,8 +12,8 @@ export async function POST(req) {
     const s3Client = new S3Client({
       region: 'eu-north-1',
       credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
+        accessKeyId: process.env.MY_AWS_ACCESS_KEY,
+        secretAccessKey: process.env.MY_AWS_SECRET_KEY,
       },
     });
 
