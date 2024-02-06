@@ -1,7 +1,10 @@
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
+import Header from "./Components/Layout/Header";
+import { AppProvider } from "./Components/AppContext";
+import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -10,8 +13,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body className={roboto.className}>
+        <main className=" max-w-4xl mx-auto p-4">
+          <AppProvider>
+            <Toaster/>
+          <Header />
+          {children}
+          {/* FOTTER SECTION */}
+          <footer className="border-t p-8 text-center text-gray-500 mt-16">
+            &copy; 2024 All rights reserved
+          </footer>
+          </AppProvider>
+        </main>
+      </body>
     </html>
   );
 }
