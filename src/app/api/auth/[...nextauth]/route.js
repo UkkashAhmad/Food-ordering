@@ -11,8 +11,7 @@ import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
-
- export const authOptions = {
+export const authOptions = {
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -21,14 +20,10 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      name: "Credentials",
-      id: "credentials",
+      name: 'Credentials',
+      id: 'credentials',
       credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "user@example.com",
-        },
+        username: { label: "Email", type: "email", placeholder: "test@example.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -36,25 +31,27 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
         const password = credentials?.password;
 
         mongoose.connect(process.env.MONGO_URL);
-        const user = await User.findOne({ email });
+        const user = await User.findOne({email});
         const passwordOk = user && bcrypt.compareSync(password, user.password);
 
         if (passwordOk) {
           return user;
         }
-      },
-    }),
+
+        return null
+      }
+    })
   ],
 };
 
 export async function isAdmin() {
   const session = await getServerSession(authOptions);
-  const userEmail = session.user.email;
-  if(!userEmail){
+  const userEmail = session?.user?.email;
+  if (!userEmail) {
     return false;
   }
   const userInfo = await UserInfo.findOne({email:userEmail});
-  if(!userInfo){
+  if (!userInfo) {
     return false;
   }
   return userInfo.admin;
@@ -62,4 +59,4 @@ export async function isAdmin() {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
