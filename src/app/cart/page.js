@@ -100,7 +100,7 @@ if(cartProducts?.length === 0 ){
           )}
           {cartProducts?.length > 0 &&
             cartProducts.map((product, index) => (
-              <CartProduct key={index} product={product} onRemove={removeCartProduct} />
+              <CartProduct key={index} product={product} onRemove={removeCartProduct} index={index} />
             ))}
           <div className="py-4 flex justify-end pr-16 items-center">
             <div className="text-gray-500">
