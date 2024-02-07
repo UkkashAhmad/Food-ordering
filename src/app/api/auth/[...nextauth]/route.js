@@ -1,16 +1,13 @@
-// this is managing states like user login with google or with 
-// email and password we r setting all of this here
-
-
 import clientPromise from "../../../libs/mongoConnect";
-import { UserInfo } from "../../models/UserInfo";
+import {UserInfo} from "../../models/UserInfo";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
-import { User } from "../../models/User";
-import NextAuth, { getServerSession } from "next-auth";
+import {User} from '../../models/User';
+import NextAuth, {getServerSession} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
+
 export const authOptions = {
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),

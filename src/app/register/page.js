@@ -50,7 +50,7 @@ function RegisterPage() {
         </div>
       )}
       <form className="block max-w-xs mx-auto" onSubmit={handleFormSubmit}>
-        <input
+        {/* <input
           type="email"
           placeholder="email"
           value={email}
@@ -67,10 +67,10 @@ function RegisterPage() {
         <button type="submit" disabled={creatingUser}>
           {" "}
           Register
-        </button>
-        <div className="my-4 text-center text-gray-500">
+        </button> */}
+        {/* <div className="my-4 text-center text-gray-500">
           or login with provider
-        </div>
+        </div> */}
         <button
          onClick={() => signIn('google', {callbackUrl: '/'})}
         className="flex gap-4 justify-center">
